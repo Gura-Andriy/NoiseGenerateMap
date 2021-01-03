@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class Main {
 
     private static final int WIDTH = 512;
@@ -23,12 +26,20 @@ public class Main {
         {
             for (int x = 0; x < WIDTH; x++)
             {
-                double nx = x / FEATURE_SIZE, ny =y / FEATURE_SIZE;
-                double value = noise.noise(nx, ny)
+                double nx = x / FEATURE_SIZE - 0.5, ny = y / FEATURE_SIZE - 0.5;
+
+                double d = sqrt(nx*nx + ny*ny) / sqrt(0.5);
+                d = pow(d, 0.5);
+
+                double e = noise.noise( nx, ny)
                         + 0.5 * noise.noise(2 * nx, 2 * ny)
                         + 0.25 * noise.noise(4 * nx, 4 * ny);
+                e = (1 + e - d) / 2;
+                double value = pow(e, 2);
 
-                int rgb = 0x010101 * (int)((value + 1) * 127.5);
+                int rgb = 0x0000FF * (int)((value + 1) * 127.5);
+                if (e < 0.2) rgb = 0x90CCFB;
+
                 image.setRGB(x, y, rgb);
             }
         }
