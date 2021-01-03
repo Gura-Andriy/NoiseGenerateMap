@@ -1,4 +1,4 @@
-package com.gura;
+package com.gura.other;
 
 public class Noise {
 

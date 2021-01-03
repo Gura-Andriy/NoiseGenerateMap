@@ -1,7 +1,5 @@
 package com.gura;
 
-import java.awt.*;
-
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -19,13 +17,17 @@ public class Main {
 //        });
 
 
-        Noise noise = new Noise();
+        PerlinNoise noise = new PerlinNoise((int) (Math.random() * 1000000000));
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         for (int y = 0; y < HEIGHT; y++)
         {
             for (int x = 0; x < WIDTH; x++)
             {
-                double value = noise.eval(x / FEATURE_SIZE, y / FEATURE_SIZE);
+                double nx = x / FEATURE_SIZE, ny =y / FEATURE_SIZE;
+                double value = noise.noise(nx, ny)
+                        + 0.5 * noise.noise(2 * nx, 2 * ny)
+                        + 0.25 * noise.noise(4 * nx, 4 * ny);
+
                 int rgb = 0x010101 * (int)((value + 1) * 127.5);
                 image.setRGB(x, y, rgb);
             }
