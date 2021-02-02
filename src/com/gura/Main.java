@@ -24,10 +24,10 @@ public class Main {
         {
             for (int x = 0; x < WIDTH; x++)
             {
-                double nx = x / FEATURE_SIZE - 0.5, ny = y / FEATURE_SIZE - 0.5;
+                double nx = x / FEATURE_SIZE - 10, ny = y / FEATURE_SIZE - 10;
 
                 double d = sqrt(nx*nx + ny*ny) / sqrt(50);
-                d = pow(d, 2);
+                d = pow(d, 1.5);
 
                 double e = noise.noise( nx, ny)
                         + 0.5 * noise.noise(2 * nx, 2 * ny)
