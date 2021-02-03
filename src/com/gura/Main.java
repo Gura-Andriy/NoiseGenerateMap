@@ -1,5 +1,7 @@
 package com.gura;
 
+import com.gura.Enums.Biomes;
+
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -22,8 +24,8 @@ public class Main {
                 double nx = x / FEATURE_SIZE - (FEATURE_SIZE * 0.43),
                         ny = y / FEATURE_SIZE - (FEATURE_SIZE * 0.43);
 
-                double d = sqrt(nx*nx + ny*ny) / sqrt(50);
-                d = pow(d, 2);
+                double d = sqrt(nx*nx + ny*ny) / sqrt(60);
+                d = pow(d, 1.5);
 
                 double e = noise.noise( nx, ny)
                         + 0.5 * noise.noise(2 * nx, 2 * ny)
@@ -31,13 +33,16 @@ public class Main {
                 e = (1 + e - d) / 2;
                 double value = pow(e, 2);
 
-                int rgb = 0x0000FF * (int)((value + 1) * 127.5);
-                if (e < 0.15) rgb = 0x90CCFB;
+//                int rgb = 0x0000FF * (int)((value + 1) * 127.5);
+//                if (e < 0.15) rgb = 0x90CCFB;
+
+                Biomes bioms = new Biom().biome(e, value);
+                int rgb = bioms.getBiom();
 
                 image.setRGB(x, y, rgb);
             }
         }
-        ImageIO.write(image, "png", new File("noise.png"));
+        ImageIO.write(image, "png", new File("map.png"));
 
 
 
