@@ -1,9 +1,11 @@
-package com.gura;
+package com.gura.classes;
 
 import com.gura.Enums.Biomes;
 
 public class Biom {
-    Biomes biome(double e, double m) {
+    public Biomes biome(double e, double m) {
+        if (e <0.008) return Biomes.DEEP_OCEAN;
+
         if (e < 0.1) return Biomes.OCEAN;
         if (e < 0.12) return Biomes.BEACH;
 
@@ -21,7 +23,7 @@ public class Biom {
         }
 
         if (e > 0.3) {
-            if (m < 0.16) return Biomes.TEMPERATE_DESERT;
+            if (m < 0.46) return Biomes.TEMPERATE_DESERT;
             if (m < 0.50) return Biomes.GRASSLAND;
             if (m < 0.83) return Biomes.TEMPERATE_DECIDUOUS_FOREST;
             return Biomes.TEMPERATE_RAIN_FOREST;

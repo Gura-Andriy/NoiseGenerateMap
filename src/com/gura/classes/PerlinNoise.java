@@ -1,4 +1,4 @@
-package com.gura;
+package com.gura.classes;
 
 import java.util.Random;
 
