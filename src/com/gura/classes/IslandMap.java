@@ -1,6 +1,7 @@
 package com.gura.classes;
 
 import com.gura.Enums.Biomes;
+import com.gura.interfaces.Map;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class NoiseMapMaker {
+public class IslandMap implements Map {
     private int height;
     private int width;
     private int featureSize;
@@ -22,7 +23,7 @@ public class NoiseMapMaker {
         return image;
     }
 
-    public NoiseMapMaker(int height, int width, int featureSize) {
+    public IslandMap(int height, int width, int featureSize) {
         this.height = height;
         this.width = width;
         this.featureSize = featureSize;
@@ -31,7 +32,7 @@ public class NoiseMapMaker {
         noise = new PerlinNoise((int) (Math.random() * 1000000000));
     }
 
-    public void imageMap() {
+    public void generateImage() {
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
